@@ -12,7 +12,7 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var x = new UserService();
-            var a = x.GetUserById(1);
+            var variabi = x.GetUserFriends(3);
             return View();
         }
 
