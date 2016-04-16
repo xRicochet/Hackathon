@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Hackathon.Data
 {
-    public class User
+    public class User:BaseEntity
     {
-        public int Id { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsActive { get; set; }
@@ -16,6 +16,6 @@ namespace Hackathon.Data
         public string UserToken { get; set; }
         public string FacebookId { get; set; }
         public string GoogleId { get; set; }
-        public string ProfilePhoto { get; set; }
+        public string ProfilePic { get; set; }
     }
 }

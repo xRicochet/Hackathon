@@ -39,7 +39,7 @@ namespace Hackathon.Services
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<String>("Select p.PicturePath from Pics p where p.PartyId=@PartyId", new { PartyId}).ToList();
+                var user = connection.Query<String>("Select p.PicturePath from Pics p where p.PartyId=@PartyId",new { PartyId }).ToList();
                 connection.Close();
                 return user;
             }

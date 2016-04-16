@@ -8,6 +8,10 @@ namespace Hackathon.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FacebookId { get; set; }
+        public string GoogleId { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -79,6 +83,7 @@ namespace Hackathon.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class ResetPasswordViewModel

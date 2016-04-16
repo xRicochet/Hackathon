@@ -5,9 +5,8 @@ using System.Web;
 
 namespace Hackathon.Data
 {
-    public class Party
+    public class Party :BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int OwnerId { get; set; }
         public DateTime StartsAt { get; set; }

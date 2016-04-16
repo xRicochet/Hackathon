@@ -75,7 +75,7 @@ namespace Hackathon.Services
             {
                 connection.Open();
                 //var user = connection.Query<User>(String.Concat(userQuery, "join Friends f on f.UserId=u.Id join Users u1 on u1.Id=f.FriendId where u.Id= ", id)).ToList();
-                var user = connection.Query<User>("Select u.* from Friends f join Users u on u.Id=f.FriendId where f.UserId=@id AND f.FriendId!=@id",new { id}).ToList();
+                var user = connection.Query<User>("Select u.* from Friends f join Users u on u.Id=f.FriendId where f.UserId=@id AND f.FriendId!=@id", new { id }).ToList();
 
                 connection.Close();
                 return user;
