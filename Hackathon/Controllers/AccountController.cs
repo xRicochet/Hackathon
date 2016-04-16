@@ -9,6 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Hackathon.Models;
+using Hackathon.DbData;
+using Hackathon.Services;
+using Hackathon.Data;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Security;
+using System.Collections.Generic;
 
 namespace Hackathon.Controllers
 {
@@ -17,9 +23,14 @@ namespace Hackathon.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private UnitOfWork unitOfWork = new UnitOfWork();
+        private Service<User> userRepository;
+        private IUserService userService;
 
         public AccountController()
         {
+            this.userRepository = unitOfWork.Service<User>();
+            this.userService = new UserService();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -65,7 +76,6 @@ namespace Hackathon.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -73,22 +83,37 @@ namespace Hackathon.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            var user = userService.GetUserByEmailAndPassword(model.Email, model.Password);
+            var u = userService.GetUserByEmail(model.Email);
+            if (user == null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
             }
+
+            ApplicationUser a = new ApplicationUser();
+            a.Email = user.Email;
+            a.EmailConfirmed = user.IsApproved;
+            a.Id = user.Id.ToString();
+            a.PasswordHash = user.Password;
+            a.UserName = user.FirstName + " " + user.LastName;
+            var ident = new ClaimsIdentity(
+          new[] { 
+              // adding following 2 claim just for supporting default antiforgery provider
+              new Claim(ClaimTypes.NameIdentifier, a.Id),
+              new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+              new Claim("FirstName",user.FirstName),
+              new Claim("LastName",user.LastName),
+              new Claim(ClaimTypes.Name,model.Email),
+
+              // optionally you could add roles if any
+              new Claim(ClaimTypes.Role, "User")
+          },
+          DefaultAuthenticationTypes.ApplicationCookie);
+
+            HttpContext.GetOwinContext().Authentication.SignIn(
+               new AuthenticationProperties { IsPersistent = false }, ident);
+            return RedirectToLocal(returnUrl);
         }
 
         //
@@ -152,22 +177,35 @@ namespace Hackathon.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var guest = userService.GetUserByEmail(model.Email);
+                if(guest==null)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    guest = new User();
+                    guest.Email = model.Email;
+                    guest.Password = model.Password;
+                    guest.FirstName = model.FirstName;
+                    guest.LastName = model.LastName;
+                    userRepository.Insert(guest);
+                    var ident = new ClaimsIdentity(
+                      new[] { 
+                          // adding following 2 claim just for supporting default antiforgery provider
+                          new Claim(ClaimTypes.NameIdentifier, model.Email),
+                          new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+                          new Claim("FirstName",model.FirstName),
+                          new Claim("LastName",model.LastName),
+                          new Claim(ClaimTypes.Name,model.Email),
 
+                          // optionally you could add roles if any
+                          new Claim(ClaimTypes.Role, "User")
+                      },
+                      DefaultAuthenticationTypes.ApplicationCookie);
+
+                    HttpContext.GetOwinContext().Authentication.SignIn(
+                       new AuthenticationProperties { IsPersistent = false }, ident);
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
             }
-
+            ViewBag.RegisterError = "Register Failed";
             // If we got this far, something failed, redisplay form
             return View(model);
         }

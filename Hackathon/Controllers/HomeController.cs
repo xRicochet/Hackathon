@@ -13,10 +13,12 @@ namespace Hackathon.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
         private Service<User> userRepository;
+        public IUserService userService;
 
         public HomeController()
         {
             this.userRepository = unitOfWork.Service<User>();
+            this.userService = new UserService();
         }
         public ActionResult Index()
         {
@@ -27,7 +29,7 @@ namespace Hackathon.Controllers
             b.FirstName = "Bogdan";
             b.LastName = "Luncasu";
             b.Password = "123456";
-    
+            var c = userService.GetAllUsers();
             return View();
         }
 
