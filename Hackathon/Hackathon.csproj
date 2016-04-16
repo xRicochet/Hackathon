@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartyController.cs" />
     <Compile Include="Data\BaseEntity.cs" />
     <Compile Include="Data\Chat.cs" />
     <Compile Include="Data\ChatMessenger.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Data\Party.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IPartyService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\PartyService.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Party\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
