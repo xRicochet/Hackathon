@@ -15,5 +15,6 @@ namespace Hackathon.Data
         public float LocationLong { get; set; }
         public float LocationLat { get; set; }
         public string LocationName { get; set; }
+        public List<string> Pics { get; set; }
     }
 }

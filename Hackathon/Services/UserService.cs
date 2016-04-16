@@ -22,6 +22,7 @@ namespace Hackathon.Services
                 connection.Open();
                 var user = connection.Query<User>(String.Concat(userQuery, id)).SingleOrDefault();
                 return user;
+                connection.Close();
             }
         }
     }
