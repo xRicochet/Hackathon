@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hackathon.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,8 @@ namespace Hackathon.Controllers
     {
         public ActionResult Index()
         {
+            var x = new UserService();
+            var a = x.GetUser(1);
             return View();
         }
 
