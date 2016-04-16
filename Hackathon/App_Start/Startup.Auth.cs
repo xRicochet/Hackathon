@@ -54,9 +54,9 @@ namespace Hackathon
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1748266588753975",
+               appSecret: "632b21c68012187d87c2a4ec79b8d184");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
