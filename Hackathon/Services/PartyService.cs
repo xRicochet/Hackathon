@@ -9,7 +9,7 @@ using Hackathon.Data;
 
 namespace Hackathon.Services
 {
-    public class PartyService
+    public class PartyService : IPartyService
     {
         public static readonly string partyQuery = "Select p.* from Party p ";
         
