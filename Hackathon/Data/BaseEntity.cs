@@ -8,7 +8,7 @@ namespace Hackathon.Data
 
     public abstract class BaseEntity
     {
-        public Int64 Id { get; set; }
+        public int Id { get; set; }
 
     }
 }

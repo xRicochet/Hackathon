@@ -9,9 +9,9 @@ using Hackathon.Data;
 
 namespace Hackathon.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        public static readonly string userQuery = "Select u.* from Users u ";
+        public static readonly string userQuery = @"Select u.* from Users u ";
 
         public User GetUserById(int id)
         {
@@ -30,7 +30,7 @@ namespace Hackathon.Services
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<User>(String.Concat(userQuery, "where u.Email = ", Email)).SingleOrDefault();
+                var user = connection.Query<User>(@String.Concat(userQuery, "where u.Email = '"+ Email+"'")).SingleOrDefault();
                 connection.Close();
                 return user;
             }
@@ -58,12 +58,12 @@ namespace Hackathon.Services
             }
         }
 
-        public User GetUserByEmailAndPassword(String Email,String Password)
+        public User GetUserByEmailAndPassword(String email,String password)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<User>(String.Concat(userQuery, "where u.Email = ", Email," AND u.Password = ",Password)).SingleOrDefault();
+                var user = connection.Query<User>(String.Concat(userQuery, "where u.Email = '"+email+"' AND u.Password = '"+password+"'"),new { password }).SingleOrDefault();
                 connection.Close();
                 return user;
             }
