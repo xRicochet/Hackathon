@@ -21,7 +21,7 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var x = new UserService();
-            var a = x.GetUser(1);
+            var a = x.GetUserById(1);
             var b = new User();
             b.Email = "bogdan.luncasu@gmail.com";
             b.FirstName = "Bogdan";
