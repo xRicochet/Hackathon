@@ -211,6 +211,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\34.jpg" />
+    <Content Include="Images\44.jpg" />
+    <Content Include="Images\clk2.png" />
+    <Content Include="Images\colorful.jpg" />
+    <Content Include="Images\images.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include=".bin\bower.cmd" />
