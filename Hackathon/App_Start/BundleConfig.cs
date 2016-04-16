@@ -26,6 +26,13 @@ namespace Hackathon
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/carouseljs").Include(
+                      "~/Scripts/jquery-1.10.2.intellisense.js",
+                      "~/Scripts/owl.carousel.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/carouselcss").Include(
+                      "~/Content/owl.carousel.css"));
         }
     }
 }
