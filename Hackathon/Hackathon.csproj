@@ -211,6 +211,7 @@
     <Compile Include="Services\ChatMessengerService.cs" />
     <Compile Include="Services\CommentariesService.cs" />
     <Compile Include="Services\IChatMessengerService.cs" />
+    <Compile Include="Services\ICommentariesService.cs" />
     <Compile Include="Services\IPartyService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\Service.cs" />
