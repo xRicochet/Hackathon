@@ -1,18 +1,17 @@
-﻿<link href="~/Content/style.css" rel="stylesheet" />
-
+﻿<link href=":8888" rel="stylesheet" />
     <div id="name">
         <p>UserName</p>
         <p id="error"></p>
         <form id="set_name">
 
-            <input size="20" id="nickname" title="nickname" />
+            <input size="20" id="nickname" name="nickname" />
             <input type="submit" />
         </form>
 
     </div>
 
     <div id="wrap_chat">
-        <div id="chat" style="color:black;height:300px;width:500px;overflow-y: auto;"></div>
+        <div id="chat" style="height:300px;width:500px;overflow-y: auto;"></div>
         <form id="send_msg">
             <input size="60" id="msg" />
             <input type="submit" />
@@ -23,6 +22,7 @@
     <script src="socket.io/socket.io.js"></script>
     <script>
 jQuery(function($){
+
 var socket=io.connect();
 var $send_msg=$('#send_msg');
 var $msg=$('#msg');
@@ -60,4 +60,5 @@ $chat.append(data+"<br>");
 });
 
     </script>
+
 

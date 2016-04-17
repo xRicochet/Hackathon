@@ -1,4 +1,5 @@
-﻿@model Hackathon.DTO.PartyDTO
+﻿@using Hackathon.Models
+@model Hackathon.DTO.PartyDTO
 
 @{
     ViewBag.Title = "Details";
@@ -13,7 +14,9 @@
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
-        @if (Model.Pics != null)
+        @if (Model != null)
+        {
+        if (Model.Pics != null)
             {
             <!-- Carousel items -->
             <div class="carousel-inner">
@@ -30,6 +33,7 @@
                     </div>
                 }
             </div>
+        }
         }
         <!-- Carousel nav -->
         <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -60,5 +64,15 @@
 <script>
    initMap();
 </script>
+@foreach(var item in Model.Commentaries)
+{
+    <div class="jumbotron" style="color:black;font-size:20px">@item.LastName:  @item.Message   - @item.Timestamp</div>
+}
+@using (Html.BeginForm("Comentariu","Party"))
+{
+    <input type="text" name="msg" />
+    <input type="number" name="id" value="@Model.Id" style="display:none" />
+    <input type="submit" />
+}
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 
