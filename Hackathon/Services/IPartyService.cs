@@ -12,6 +12,5 @@ namespace Hackathon.Services
         Party GetPartyByID(int PartyId);
         List<Party> GetAllParties();
         List<String> GetPicsFromParty(int PartyId);
-        List<Tuple<int, string>> GetAllPictures();
     }
 }

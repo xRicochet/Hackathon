@@ -44,17 +44,5 @@ namespace Hackathon.Services
                 return user;
             }
         }
-
-        public List<Tuple<int,string>> GetAllPictures()
-        {
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
-            {
-                connection.Open();
-                var user = connection.Query<Tuple<int, string>>("Select p.PicturePath from Pics p ").ToList();
-                connection.Close();
-                return user;
-            }
-        }
-
     }
 }

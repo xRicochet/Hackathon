@@ -25,11 +25,10 @@ namespace Hackathon.Controllers
         {
             var parties = partyService.GetAllParties();
             List<PartyDTO> partiesDTO = new List<PartyDTO>(parties.Count);
-            List<Tuple<int,string>> Pictures = partyService.GetAllPictures();
             for (int i = 0; i < parties.Count; i++)
             {
                 partiesDTO[i].InjectFrom(parties[i]);
-                partiesDTO[i].Pics = Pictures.Where(picture => picture.Item1==partiesDTO[i].Id).Select(picture => picture.Item2).ToList();
+                partiesDTO[i].Pics = partyService.GetPicsFromParty(partiesDTO[i].Id);
             }
             return View(new List<PartyDTO>());
         }
