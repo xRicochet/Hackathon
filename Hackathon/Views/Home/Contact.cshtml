@@ -1,17 +1,64 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿<link href=":8888" rel="stylesheet" />
+    <div id="name">
+        <p>UserName</p>
+        <p id="error"></p>
+        <form id="set_name">
+
+            <input size="20" id="nickname" name="nickname" />
+            <input type="submit" />
+        </form>
+
+    </div>
+
+    <div id="wrap_chat">
+        <div id="chat" style="height:300px;width:500px;overflow-y: auto;"></div>
+        <form id="send_msg">
+            <input size="60" id="msg" />
+            <input type="submit" />
+        </form>
+    </div>
+    <div id="users"></div>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+jQuery(function($){
+
+var socket=io.connect();
+var $send_msg=$('#send_msg');
+var $msg=$('#msg');
+var $chat=$('#chat');
+var $users=$('#users');
+
+var $set_name=$('#set_name');
+var $name=$('#nickname');
+var $error=$('#error');
+$set_name.submit(function(e){
+e.preventDefault();
+socket.emit('new_user',$name.val(),function(data){
+if(data){
+$('#name').hide();
+$('#wrap_chat').show();
+}else{
+$error.html("Username has already taken");
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+});
+nickname.val('');
+});
+socket.on('usernames',function(data){
+var html='';
+for(i=0;i<data.length;i++)html+=data[i]+"<br/>";
+$users.html(html);
+});
+$send_msg.submit(function(e){
+e.preventDefault();
+socket.emit('send_msg',$msg.val());
+$msg.val('');
+});
+socket.on('new_msg',function(data){
+$chat.append(data+"<br>");
+});
+});
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    </script>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+

@@ -18,7 +18,6 @@
             var lat = parseFloat($("#map").data('lat'),2)
             var long = parseFloat($("#map").attr('data-long'),2)
             var location = parseFloat($("#map").attr('data-location'),2)
-            alert(lat);
 
             var directionsDisplay = new google.maps.DirectionsRenderer({
                 map: map

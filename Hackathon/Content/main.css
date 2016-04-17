@@ -1,0 +1,30 @@
+#name,#wrap_chat,#users{
+    display:block;
+}
+#users{
+    margin-top:10%;
+}
+#name > p{
+    font: bold 30px Script;
+}
+#name{
+
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:25%;
+
+    width:30%;
+    height:30%;
+}
+#wrap_chat{
+  margin-top:10%;
+    margin-left:25%;
+    float:left;
+
+    display:none;
+}
+body{
+
+    background-image:url("http://elysianvisions.com.au/Images/HTML_background_1024.jpg");
+
+}

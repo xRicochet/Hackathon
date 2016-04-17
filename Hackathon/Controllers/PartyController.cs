@@ -15,11 +15,13 @@ namespace Hackathon.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
         private Service<Party> partyRepository;
+        private Service<Commentaries> commentariesRepository;
         private IUserService userService;
         private IPartyService partyService;
         private ICommentariesService commentaryService;
         public PartyController()
         {
+            this.commentariesRepository = unitOfWork.Service<Commentaries>();
             this.partyRepository = unitOfWork.Service<Party>();
             this.partyService = new PartyService();
             this.commentaryService = new CommentariesService();
@@ -54,10 +56,23 @@ namespace Hackathon.Controllers
                 comment.InjectFrom(c);
                 comment.LastName = user.LastName;
                 comment.FirstName = user.FirstName;
+                commsDTO.Add(comment);
             }
+            partyDTO.Commentaries = commsDTO;
+            if(Id!=null)
             return View(partyDTO);
+            return View();
         }
+        [HttpPost]
+        public ActionResult Comment(string msg,string id)
+        {
+            Commentaries cmt = new Commentaries();
+            cmt.Message = msg;
+            cmt.PartyId = int.Parse(id);
 
+            commentariesRepository.Insert(cmt);
+            return Details(cmt.PartyId);
+        }
 
     }
 }
