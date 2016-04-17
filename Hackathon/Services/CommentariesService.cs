@@ -8,7 +8,7 @@ using Hackathon.Data;
 
 namespace Hackathon.Services
 {
-    public class CommentariesService
+    public class CommentariesService:ICommentariesService
     {
         public List<Commentaries> GetAllCommentariesAtAParty(int PartyId)
         {
