@@ -24,14 +24,15 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var parties = partyService.GetAllParties();
-            List<PartyDTO> partiesDTO = new List<PartyDTO>(parties.Count);
-            List<Tuple<int,string>> Pictures = partyService.GetAllPictures();
+            List<PartyDTO> partiesDTO = new List<PartyDTO>();
             for (int i = 0; i < parties.Count; i++)
             {
-                partiesDTO[i].InjectFrom(parties[i]);
-                partiesDTO[i].Pics = Pictures.Where(picture => picture.Item1==partiesDTO[i].Id).Select(picture => picture.Item2).ToList();
+                PartyDTO partyDTO = new PartyDTO();
+                partyDTO.InjectFrom(parties[i]);
+                partyDTO.Pics = partyService.GetPicsFromParty(partyDTO.Id);
+                partiesDTO.Add(partyDTO);
             }
-            return View(new List<PartyDTO>());
+            return View(partiesDTO);
         }
 
         public ActionResult Details(int Id)

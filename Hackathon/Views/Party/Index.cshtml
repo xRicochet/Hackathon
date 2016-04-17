@@ -4,70 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartsAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndsAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationLong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationLat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OwnerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartsAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndsAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationLong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationLat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>*@
-<div class="jumbotron" >
+@foreach (var party in Model)
+{
+<div class="jumbotron">
     <div style="padding-left: 0px; padding-right: 0px; width: auto; margin-left:0px;margin-right:0px;">
         <div id="myCarousel" class="carousel slide">
             <!-- Carousel indicators -->
@@ -76,28 +15,35 @@
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
-
+            @if (party.Pics != null)
+            {
             <!-- Carousel items -->
             <div class="carousel-inner">
+                @if (party.Pics.Count > 0)
+                {
                 <div class="item active" style="width:100%;heigh:100%;overflow:hidden;">
-                    <img src="~/Images/pexels-photo-31248.jpg" alt="First slide" style="width:100%;height:500px;margin:-75px 0 -75px 0">
+                    <img src="@party.Pics[0]" alt="First slide" style="width:100%;height:500px;margin:-75px 0 -75px 0">
                 </div>
-
+                }
+                @for (int i = 1; i < party.Pics.Count; i++)
+                {
                 <div class="item" style="width:100%;heigh:100%;overflow:hidden;">
-                    <img src="https://static.pexels.com/photos/24367/pexels-photo-24367.jpg" alt="Second slide" style="width:100%;height:500px;margin:-75px 0 -75px 0">
+                    <img src="@party.Pics[i]" alt="Second slide" style="width:100%;height:500px;margin:-75px 0 -75px 0">
                 </div>
-
-                <div class="item" style="width:100%;heigh:100%;overflow:hidden;">
-                    <img src="https://static.pexels.com/photos/2773/city-skyline-skyscrapers-top.jpg" alt="Third slide" style="width:100%;height:500px;margin:-75px 0 -75px 0">
-                </div>
+                }
             </div>
-
+            }
             <!-- Carousel nav -->
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 
         </div>
     </div>
+    <div>
+        <p>PARTY DETAIL</p>
+    </div>
+</div>
+}
     <script>
         $(".owl-carousel").owlCarousel({
             loop: true,
@@ -107,7 +53,3 @@
             autoWidth: true,
         })
     </script>
-    <div>
-        <p>PARTY DETAIL</p>
-    </div>
-</div>

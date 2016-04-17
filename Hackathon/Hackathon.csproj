@@ -238,6 +238,10 @@
     <Content Include="Images\clk2.png" />
     <Content Include="Images\colorful.jpg" />
     <Content Include="Images\images.jpg" />
+    <Content Include="Images\pexels-photo-31248.jpg" />
+    <Content Include="Images\pexels-photo-59497.jpeg" />
+    <Content Include="Images\pexels-photo.jpg" />
+    <Content Include="Images\pozaRandom.jpg" />
     <Content Include="Images\site-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
