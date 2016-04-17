@@ -10,5 +10,6 @@ namespace Hackathon.Data
         public int UserId { get; set; }
         public int PartyId { get; set; }
         public String Message { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }
