@@ -4,71 +4,56 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Party</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div style="padding-left: 0px; padding-right: 0px; width: auto; margin-left:0px;margin-right:0px;">
+    <div id="myCarousel" class="carousel slide">
+        <!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        @if (Model.Pics != null)
+            {
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                @if (Model.Pics.Count > 0)
+                {
+                    <div class="item active" style="width:100%;heigh:100%;overflow:hidden;">
+                        <img src="~/Images/@Model.Pics[0]" alt="First slide" style="width:100%;max-height:700px;margin:-75px 0 -75px 0">
+                    </div>
+                }
+                @for (int i = 1; i < Model.Pics.Count; i++)
+                {
+                    <div class="item" style="width:100%;heigh:100%;overflow:hidden;">
+                        <img src="~/Images/@Model.Pics[i]" alt="Second slide" style="width:100%;max-height:700px;margin:-75px 0 -75px 0">
+                    </div>
+                }
+            </div>
+        }
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    </div>
+    <div class="container" style="background-color: rgba(204, 204, 204, 0.5);margin-bottom:20px;">
+        <h2 style="text-align:center">@Model.Name</h2>
+        <div>
+            <div>
+                Cand?
+            </div>
+            <div>
+                @Model.StartsAt
+            </div>
+        </div>
+        <div>
+            <div>
+                Unde?
+            </div>
+            <div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OwnerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OwnerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartsAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartsAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndsAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndsAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationLong)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationLong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationLat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationLat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocationName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocationName)
-        </dd>
-
-    </dl>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
