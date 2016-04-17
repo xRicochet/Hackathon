@@ -196,6 +196,7 @@
     <Compile Include="Data\Pics.cs" />
     <Compile Include="DbData\EFDbContext.cs" />
     <Compile Include="DbData\UnitOfWork.cs" />
+    <Compile Include="DTO\CommentariesDTO.cs" />
     <Compile Include="DTO\PartyDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,6 +211,7 @@
     <Compile Include="Services\ChatMessengerService.cs" />
     <Compile Include="Services\CommentariesService.cs" />
     <Compile Include="Services\IChatMessengerService.cs" />
+    <Compile Include="Services\ICommentariesService.cs" />
     <Compile Include="Services\IPartyService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\Service.cs" />
