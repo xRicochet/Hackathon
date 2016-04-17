@@ -10,6 +10,10 @@
     <script src="~/Scripts/jquery.backstretch.js"></script>
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div class="collapse navbar-collapse " style="background-color: rgba(204, 204, 204, 0.5);">
@@ -25,8 +29,8 @@
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Cauta Petrecerea", "Index", "Party")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</liclass="col-lg-2">
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</liclass="col-lg-2">
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,10 +38,11 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - La O Ieaseala 2</p>
-        </footer>
+        <div class="navbar-fixed-bottom container">
+            <footer>
+                <p>&copy; @DateTime.Now.Year - La O Ieaseala 2</p>
+            </footer>
+        </div>
     </div>
     <script>
         'use strict';

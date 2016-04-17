@@ -10,6 +10,6 @@ namespace Hackathon.Services
 {
     public class CommentariesService
     {
-        public List<Commentaries> GetAllCommentariesAtAParty(int PartyId)
+       
     }
 }
