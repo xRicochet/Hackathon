@@ -15,13 +15,28 @@
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            var lat = parseFloat($("#map").data('lat'),2)
+            var long = parseFloat($("#map").attr('data-long'),2)
+            var location = parseFloat($("#map").attr('data-location'),2)
+            alert(lat);
 
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
+
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: {lat: lat, lng: long},
+                origin: pos,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
             
-            map.setCenter(pos);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: pos,
-                title: 'Hello World!'
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
             });
         }, function () {
             handleLocationError(true, infoWindow, map.getCenter());

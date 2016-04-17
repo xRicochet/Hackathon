@@ -22,6 +22,7 @@
                     <legend>Register <i class="fa fa-pencil pull-right"></i></legend>
                     @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         <span id="Label2" class="col-lg-3 control-label">Nume</span>
                         <div class="col-lg-9">
@@ -38,24 +39,26 @@
                         <span id="Label1" class="col-lg-3 control-label">Email</span>
                         <div class="col-lg-9">
                             @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @name = "TextBox1", @id = "TextBox1", @type = "text", @class = "form-control", @placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <span id="Label2" class="col-lg-3 control-label">Parola</span>
                         <div class="col-lg-9">
                             @Html.PasswordFor(m => m.Password, htmlAttributes: new { @name = "TextBox2", @id = "TextBox2", @class = "form-control", @placeholder = "Parola" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <span id="Label2" class="col-lg-3 control-label">Confirma Parola</span>
                         <div class="col-lg-9">
                             @Html.PasswordFor(m => m.ConfirmPassword, htmlAttributes: new { @name = "TextBox2", @id = "TextBox2", @class = "form-control", @placeholder = "Confirma Parola" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-8 col-lg-offset-4">
                             <input type="submit" name="btnSubmit" value="Submit" id="btnSubmit" class="btn btn-primary" />
-                            <input type="submit" name="btnCancel" value="Cancel" id="btnCancel" class="btn btn-warning" />
                         </div>
                     </div>
                     }

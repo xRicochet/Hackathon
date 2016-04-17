@@ -57,5 +57,7 @@ namespace Hackathon.Controllers
             }
             return View(partyDTO);
         }
+
+
     }
 }

@@ -25,15 +25,17 @@
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                     <div class="form-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <span id="Label1" class="col-lg-3 control-label">Email</span>
                         <div class="col-lg-9">
-                            @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @name = "TextBox1", @id = "TextBox1", @type = "text", @class = "form-control", @placeholder = "Email" })
+                            @Html.TextBoxFor(m => m.Email, htmlAttributes: new { @name = "TextBox1", @id = "TextBox1", @type = "text", @class = "form-control", @placeholder = "Email"})
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <span id="Label2" class="col-lg-3 control-label">Password</span>
                         <div class="col-lg-9">
-                            @Html.PasswordFor(m => m.Password, htmlAttributes: new { @name = "TextBox2", @id = "TextBox2", @class = "form-control", @placeholder = "Password" })
+                            @Html.PasswordFor(m => m.Password, htmlAttributes: new { @name = "TextBox2", @id = "TextBox2", @class = "form-control", @placeholder = "Password",})
                             <div class="checkbox">
                                 <label>
                                     @Html.CheckBoxFor(m => m.RememberMe, htmlAttributes: new { @id = "CheckBox1", @type = "checkbox", @name = "CheckBox1" }) Remember Me
@@ -42,22 +44,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-8 col-lg-offset-4">
                             <input type="submit" name="btnSubmit" value="Submit" id="btnSubmit" class="btn btn-primary" />
-                            <input type="submit" name="btnCancel" value="Cancel" id="btnCancel" class="btn btn-warning" />
+                            
                         </div>
                     </div>
                     }
                     @{var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes(); }
                     @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
                     @Html.AntiForgeryToken()
-                    <div id="socialLoginList">
-                        <p>
-                            @foreach (AuthenticationDescription p in loginProviders)
-                            {
-                                <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                            }
-                        </p>
+                    <div id="socialLoginList" class="col-lg-9 col-lg-offset-3">
+                        <input type="submit" class="btn btn-default btn-warning" id="Facebook" name="provider" value="Facebook" title="Log in using your Facebook account" />
                     </div>
                     }
                 </fieldset>

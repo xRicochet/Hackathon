@@ -306,7 +306,9 @@
     <Content Include="Views\Party\Details.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Noise\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
