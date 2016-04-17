@@ -24,9 +24,12 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var parties = partyService.GetAllParties();
-            foreach (var party in parties)
+            List<PartyDTO> partiesDTO = new List<PartyDTO>(parties.Count);
+            List<Tuple<int,string>> Pictures = partyService.GetAllPictures();
+            for (int i = 0; i < parties.Count; i++)
             {
-
+                partiesDTO[i].InjectFrom(parties[i]);
+                partiesDTO[i].Pics = Pictures.Where(picture => picture.Item1==partiesDTO[i].Id).Select(picture => picture.Item2).ToList();
             }
             return View(new List<PartyDTO>());
         }
@@ -34,7 +37,10 @@ namespace Hackathon.Controllers
         public ActionResult Details(int Id)
         {
             var party = partyService.GetPartyByID(Id);
-            return View(party);
+            PartyDTO partyDTO = new PartyDTO();
+            partyDTO.InjectFrom(party);
+            partyDTO.Pics = partyService.GetPicsFromParty(partyDTO.Id);
+            return View(partyDTO);
         }
     }
 }
