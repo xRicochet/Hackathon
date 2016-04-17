@@ -9,7 +9,7 @@ using Hackathon.Data;
 
 namespace Hackathon.Services
 {
-    public class ChatMessengerService
+    public class ChatMessengerService : IChatMessengerService
     {
         public List<String> GetChatMessages(int chatId)
         {
