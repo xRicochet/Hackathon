@@ -184,16 +184,14 @@ namespace Hackathon.Controllers
                     guest.Password = model.Password;
                     guest.FirstName = model.FirstName;
                     guest.LastName = model.LastName;
+                    guest.UserToken = Guid.NewGuid().ToString();
                     userRepository.Insert(guest);
                     var ident = new ClaimsIdentity(
                       new[] { 
                           // adding following 2 claim just for supporting default antiforgery provider
                           new Claim(ClaimTypes.NameIdentifier, model.Email),
                           new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
-                          new Claim("FirstName",model.FirstName),
-                          new Claim("LastName",model.LastName),
                           new Claim(ClaimTypes.Name,model.Email),
-
                           // optionally you could add roles if any
                           new Claim(ClaimTypes.Role, "User")
                       },
@@ -359,8 +357,9 @@ namespace Hackathon.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
+                if (loginInfo == null)
             {
                 return RedirectToAction("Login");
             }
