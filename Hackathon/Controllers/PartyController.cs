@@ -55,6 +55,7 @@ namespace Hackathon.Controllers
                 comment.LastName = user.LastName;
                 comment.FirstName = user.FirstName;
             }
+            partyDTO.Commentaries = commsDTO;
             return View(partyDTO);
         }
     }
