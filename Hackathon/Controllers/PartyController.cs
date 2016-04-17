@@ -37,7 +37,10 @@ namespace Hackathon.Controllers
         public ActionResult Details(int Id)
         {
             var party = partyService.GetPartyByID(Id);
-            return View(party);
+            PartyDTO partyDTO = new PartyDTO();
+            partyDTO.InjectFrom(party);
+            partyDTO.Pics = partyService.GetPicsFromParty(partyDTO.Id);
+            return View(partyDTO);
         }
     }
 }
