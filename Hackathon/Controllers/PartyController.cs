@@ -23,6 +23,10 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var parties = partyService.GetAllParties();
+            foreach (var party in parties)
+            {
+
+            }
             return View(parties);
         }
 
