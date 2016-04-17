@@ -11,7 +11,7 @@ namespace Hackathon.Services
 {
     public interface IChatMessengerService
     {
-        public List<String> GetChatMessages(int chatId);
-        public List<User> GetChatUsers(int chatId);
+         List<String> GetChatMessages(int chatId);
+         List<User> GetChatUsers(int chatId);
     }
 }
