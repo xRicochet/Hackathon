@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omu.ValueInjecter;
+using Hackathon.DTO;
 
 namespace Hackathon.Controllers
 {
@@ -23,9 +24,12 @@ namespace Hackathon.Controllers
         public ActionResult Index()
         {
             var parties = partyService.GetAllParties();
-            foreach (var party in parties)
+            List<PartyDTO> partiesDTO = new List<PartyDTO>(parties.Count);
+            List<Tuple<int,string>> Pictures = partyService.GetAllPictures();
+            for (int i = 0; i < parties.Count; i++)
             {
-
+                partiesDTO[i].InjectFrom(parties[i]);
+                partiesDTO[i].Pics = Pictures.Where(picture => picture.Item1==partiesDTO[i].Id).Select(picture => picture.Item2).ToList();
             }
             return View(parties);
         }

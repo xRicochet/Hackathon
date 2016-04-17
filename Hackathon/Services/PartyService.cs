@@ -34,12 +34,23 @@ namespace Hackathon.Services
             }
         }
 
-        public List<String> GetPicsFromParty(int PartyId)
+        public List<string> GetPicsFromParty(int PartyId)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
             {
                 connection.Open();
-                var user = connection.Query<String>("Select p.PicturePath from Pics p where p.PartyId=@PartyId",new { PartyId }).ToList();
+                var user = connection.Query<string>("Select p.PicturePath from Pics p where p.PartyId=@PartyId",new { PartyId }).ToList();
+                connection.Close();
+                return user;
+            }
+        }
+
+        public List<Tuple<int,string>> GetAllPictures()
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings[1].ConnectionString))
+            {
+                connection.Open();
+                var user = connection.Query<Tuple<int, string>>("Select p.PicturePath from Pics p ").ToList();
                 connection.Close();
                 return user;
             }
