@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Omu.ValueInjecter;
+using Hackathon.DTO;
 
 namespace Hackathon.Controllers
 {
@@ -27,7 +28,7 @@ namespace Hackathon.Controllers
             {
 
             }
-            return View(parties);
+            return View(new List<PartyDTO>());
         }
 
         public ActionResult Details(int Id)
