@@ -196,6 +196,7 @@
     <Compile Include="Data\Pics.cs" />
     <Compile Include="DbData\EFDbContext.cs" />
     <Compile Include="DbData\UnitOfWork.cs" />
+    <Compile Include="DTO\CommentariesDTO.cs" />
     <Compile Include="DTO\PartyDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

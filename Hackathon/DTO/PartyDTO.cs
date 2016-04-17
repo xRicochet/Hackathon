@@ -7,9 +7,10 @@ using System.Web;
 
 namespace Hackathon.DTO
 {
-    public class PartyDTO:Party
+    public class PartyDTO : Party
     {
         List<String> photoPaths { get; set; }
         List<User> partyPPL { get; set; }
+        List<CommentariesDTO> Commentaries {get; set;}
     }
 }
